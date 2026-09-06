@@ -1,4 +1,4 @@
-# Iris Logistic Regression — NumPy from Scratch vs. scikit-learn
+# Iris Logistic Regression: NumPy from Scratch vs. scikit-learn
 
 A complete machine-learning pipeline implemented **twice**:
 
@@ -26,14 +26,14 @@ Both are applied to the [Iris dataset](https://scikit-learn.org/stable/datasets/
 > (equal class representation in every fold).  With only 30 test samples
 > the particular random partition used by the NumPy run happens to be an
 > easier subset.  On cross-validated evaluation both approaches converge
-> to ~97 % accuracy — the real takeaway is that they are essentially
+> to ~97 % accuracy: the real takeaway is that they are essentially
 > equivalent.
 
 ### Training loss curve
 
 ![NumPy loss curve](plots/numpy_loss_curve.png)
 
-Cross-entropy drops from **1.105 → 0.058** over 2 000 iterations — a 94.7 % reduction.
+Cross-entropy drops from **1.105 to 0.058** over 2 000 iterations, a 94.7 % reduction.
 
 ### Comparison figure
 
@@ -118,7 +118,7 @@ $$\frac{\partial \mathcal{L}}{\partial W} = X^\top \cdot \frac{\partial \mathcal
 
 $$\frac{\partial \mathcal{L}}{\partial b} = \sum_{i=1}^{n} \frac{\partial \mathcal{L}}{\partial Z_i} = \frac{1}{n}\sum_{i=1}^{n}(P_i - Y_i)$$
 
-**Intuition:** the gradient $P - Y$ is the prediction error — how far each class probability is from the true one-hot label.  The gradient of W is a weighted sum of input features, weighted by that error.
+**Intuition:** the gradient $P - Y$ is the prediction error, how far each class probability is from the true one-hot label. The gradient of W is a weighted sum of input features, weighted by that error.
 
 ---
 
@@ -150,14 +150,14 @@ This is critical for gradient descent: without it, features with large absolute 
 ```
 iris-logistic-regression/
 ├── numpy_lr/
-│   ├── __init__.py         — package exports
-│   ├── preprocessing.py    — StandardScaler, train_test_split  (NumPy only)
-│   ├── model.py            — SoftmaxRegression with batch GD   (NumPy only)
-│   └── metrics.py          — accuracy, confusion_matrix, report (NumPy only)
+│   ├── __init__.py         : package exports
+│   ├── preprocessing.py    : StandardScaler, train_test_split  (NumPy only)
+│   ├── model.py            : SoftmaxRegression with batch GD   (NumPy only)
+│   └── metrics.py          : accuracy, confusion_matrix, report (NumPy only)
 │
-├── run_numpy.py            — full NumPy pipeline: load → scale → train → evaluate → plot
-├── run_sklearn.py          — equivalent pipeline via scikit-learn
-├── compare.py              — runs both, prints table, saves 4-panel figure
+├── run_numpy.py            : full NumPy pipeline (load, scale, train, evaluate, plot)
+├── run_sklearn.py          : equivalent pipeline via scikit-learn
+├── compare.py              : runs both, prints table, saves 4-panel figure
 │
 ├── plots/
 │   ├── numpy_loss_curve.png
@@ -180,7 +180,7 @@ iris-logistic-regression/
 | **Small random weight init** | Breaks the symmetry that would keep all K weight vectors identical |
 | **`np.clip` in log** | Prevents `log(0) = -inf` from corrupting the loss |
 | **Row-max subtraction in softmax** | Numerical stability: prevents `exp` overflow on large logits |
-| **Fit scaler on train only** | Correct ML practice — avoids test-set information leaking into preprocessing |
+| **Fit scaler on train only** | Correct ML practice, avoids test-set information leaking into preprocessing |
 
 ---
 
@@ -188,5 +188,5 @@ iris-logistic-regression/
 
 - Bishop, C. M. (2006). *Pattern Recognition and Machine Learning*, Chapter 4.
 - Goodfellow, I. et al. (2016). *Deep Learning*, Chapter 6.
-- Karpathy, A. — [CS231n lecture notes on Softmax classifier](https://cs231n.github.io/linear-classify/#softmax)
+- Karpathy, A., [CS231n lecture notes on Softmax classifier](https://cs231n.github.io/linear-classify/#softmax)
 - [sklearn LogisticRegression docs](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
